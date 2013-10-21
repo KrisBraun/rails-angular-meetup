@@ -21,13 +21,13 @@ html data-framework="angularjs" lang="en" ng-app="todomvc"
         input#toggle-all ng-click="markAll(allChecked)" ng-model="allChecked" type="checkbox"
           label for="toggle-all"
           ul#todo-list
-            li ng-class="{completed: todo.completed, editing: todo == editedTodo}" ng-repeat="todo in todos | filter:statusFilter"
+            li ng-class="{completed: todo.completed, editing: todo == editedTodo}" ng-repeat="todo in todos | filter:statusFilter | orderBy:'title'"
               .view
-                input.toggle ng-model="todo.completed" type="checkbox"
+                input.toggle ng-model="todo.completed" type="checkbox" ng-change="completeChanged(todo)"
                   label ng-dblclick="editTodo(todo)" {{todo.title}}
                   button.destroy ng-click="removeTodo(todo)"
-              form ng-submit="doneEditing(todo)"
-                input.edit ng-model="todo.title" todo-blur="doneEditing(todo)" todo-escape="revertEditing(todo)" todo-focus="todo == editedTodo"
+              form ng-submit="doneEditing()"
+                input.edit ng-model="todo.title" todo-blur="doneEditing()" todo-escape="revertEditing(todo)" todo-focus="todo == editedTodo"
       footer#footer ng-cloak="" ng-show="todos.length"
         span#todo-count
           strong {{remainingCount}}
