@@ -27,7 +27,7 @@ gem 'slim-rails', group: [:development, :test]
 gem 'rabl'
 
 gem 'momentjs-rails'
-gem 'angularjs-rails'
+gem 'angularjs-rails', github: "NickClark/angularjs-rails"
 # Using HEAD for RailsResource until 1.0 released
 gem 'angularjs-rails-resource', github: 'FineLinePrototyping/angularjs-rails-resource'
 gem 'ng-rails-csrf'
