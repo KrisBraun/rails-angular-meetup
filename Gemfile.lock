@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/FineLinePrototyping/angularjs-rails-resource.git
+  revision: 8c3e6064139912a879323906e8b1d52754726b94
+  specs:
+    angularjs-rails-resource (1.0.0.pre.1)
+
+GIT
   remote: git://github.com/brennancheung/slim.git
   revision: 53dec2403bde08b1959226212864f78015ce273f
   branch: angularjs_support
@@ -37,8 +43,8 @@ GEM
     activesupport (3.2.15)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
+    andand (1.3.3)
     angularjs-rails (1.0.8)
-    angularjs-rails-resource (0.2.3)
     arel (3.0.2)
     better_errors (1.0.1)
       coderay (>= 1.0.0)
@@ -189,8 +195,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  andand
   angularjs-rails
-  angularjs-rails-resource
+  angularjs-rails-resource!
   better_errors
   binding_of_caller
   coderay (~> 1.0.5)

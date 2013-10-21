@@ -1,27 +1,27 @@
-todomvc.controller "TodoCtrl", ($scope, $location, todoStorage, filterFilter) ->
-  todos = $scope.todos = todoStorage.get()
+todomvc.controller "TodoCtrl", ($scope, $location, Todo, filterFilter) ->
+  Todo.query().then (todos) ->
+    console.log todos
+    $scope.todos = todos
   $scope.newTodo = ""
   $scope.editedTodo = null
   $scope.$watch "todos", ((newValue, oldValue) ->
-    $scope.remainingCount = filterFilter(todos,
-      completed: false
-    ).length
-    $scope.completedCount = todos.length - $scope.remainingCount
-    $scope.allChecked = not $scope.remainingCount
-    todoStorage.put todos  if newValue isnt oldValue
+    if $scope.todos
+      $scope.remainingCount = filterFilter($scope.todos,
+        completed: false
+      ).length
+      $scope.completedCount = $scope.todos.length - $scope.remainingCount
+      $scope.allChecked = not $scope.remainingCount
   ), true
-  $location.path "/"  if $location.path() is ""
+  $location.path "/" if $location.path() is ""
   $scope.location = $location
   $scope.$watch "location.path()", (path) ->
     $scope.statusFilter = (if (path is "/active") then completed: false else (if (path is "/completed") then completed: true else null))
 
   $scope.addTodo = ->
     newTodo = $scope.newTodo.trim()
-    return  unless newTodo.length
-    todos.push
-      title: newTodo
-      completed: false
-
+    return unless newTodo.length
+    new Todo(title: newTodo).create().then (todo) ->
+      $scope.todos.push todo
     $scope.newTodo = ""
 
   $scope.editTodo = (todo) ->
@@ -31,20 +31,25 @@ todomvc.controller "TodoCtrl", ($scope, $location, todoStorage, filterFilter) ->
   $scope.doneEditing = (todo) ->
     $scope.editedTodo = null
     todo.title = todo.title.trim()
-    $scope.removeTodo todo  unless todo.title
+    if todo.title
+      todo.save().then (updatedTodo) ->
+        angular.extend todo, updatedTodo
+    else
+      $scope.removeTodo
 
   $scope.revertEditing = (todo) ->
-    todos[todos.indexOf(todo)] = $scope.originalTodo
+    $scope.todos[$scope.todos.indexOf(todo)] = $scope.originalTodo
     $scope.doneEditing $scope.originalTodo
 
   $scope.removeTodo = (todo) ->
-    todos.splice todos.indexOf(todo), 1
+    todo.remove().then ->
+      $scope.todos.splice $scope.todos.indexOf(todo), 1
 
   $scope.clearCompletedTodos = ->
-    $scope.todos = todos = todos.filter((val) ->
+    $scope.todos = $scope.todos.filter((val) ->
       not val.completed
     )
 
   $scope.markAll = (completed) ->
-    todos.forEach (todo) ->
+    $scope.todos.forEach (todo) ->
       todo.completed = completed

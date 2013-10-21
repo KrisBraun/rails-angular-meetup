@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 3.2.14'
 
+gem 'andand'
+
 gem 'mongoid', '~> 3.1.0'
 
 # Gems used only for assets and not required
@@ -26,7 +28,8 @@ gem 'rabl'
 
 gem 'momentjs-rails'
 gem 'angularjs-rails'
-gem 'angularjs-rails-resource'
+# Using HEAD for RailsResource until 1.0 released
+gem 'angularjs-rails-resource', github: 'FineLinePrototyping/angularjs-rails-resource'
 gem 'ng-rails-csrf'
 
 group :development do
