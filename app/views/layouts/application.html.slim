@@ -1,0 +1,55 @@
+doctype html
+html data-framework="angularjs" lang="en" ng-app="todomvc"
+  head
+    meta charset="utf-8"
+      meta content="IE=edge" http-equiv="X-UA-Compatible"
+        title AngularJS • TodoMVC
+        css:
+          [ng-cloak] { display: none; }
+        base href="/"
+        /! needed for Angular 1.1.x to find relative resources
+        = stylesheet_link_tag "application"
+        = javascript_include_tag "application"
+        = csrf_meta_tag
+  body
+    section#todoapp ng-controller="TodoCtrl"
+      header#header
+        h1 todos
+        form#todo-form ng-submit="addTodo()"
+          input#new-todo autofocus="" ng-model="newTodo" placeholder="What needs to be done?"
+      section#main ng-cloak="" ng-show="todos.length"
+        input#toggle-all ng-click="markAll(allChecked)" ng-model="allChecked" type="checkbox"
+          label for="toggle-all"
+          ul#todo-list
+            li ng-class="{completed: todo.completed, editing: todo == editedTodo}" ng-repeat="todo in todos | filter:statusFilter"
+              .view
+                input.toggle ng-model="todo.completed" type="checkbox"
+                  label ng-dblclick="editTodo(todo)" {{todo.title}}
+                  button.destroy ng-click="removeTodo(todo)"
+              form ng-submit="doneEditing(todo)"
+                input.edit ng-model="todo.title" todo-blur="doneEditing(todo)" todo-escape="revertEditing(todo)" todo-focus="todo == editedTodo"
+      footer#footer ng-cloak="" ng-show="todos.length"
+        span#todo-count
+          strong {{remainingCount}}
+          '
+          ng-pluralize count="remainingCount" when="{one: 'item left', other: 'items left'}"
+        ul#filters
+          li
+            a href="/" ng-class="{selected: location.path() =='/'}" All
+          li
+            a href="/active" ng-class="{selected: location.path() =='/active'}" Active
+          li
+            a href="/completed" ng-class="{selected: location.path() == '/completed'}" Completed
+        button#clear-completed ng-click="clearCompletedTodos()" ng-show="completedCount" Clear completed ({{completedCount}})
+    footer#info
+      p Double-click to edit a todo
+      p
+        | Credits:
+        a href="http://twitter.com/cburgdorf" Christoph Burgdorf
+        a href="http://ericbidelman.com" Eric Bidelman
+        a href="http://jacobmumm.com" Jacob Mumm
+        | and
+        a href="http://igorminar.com" Igor Minar
+      p
+        | Part of
+        a href="http://todomvc.com" TodoMVC
