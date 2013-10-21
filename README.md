@@ -13,6 +13,7 @@ Gems
 * [angularjs-rails](https://github.com/hiravgandhi/angularjs-rails) - Angular in the asset pipeline
 * [angularjs-rails-resource](https://github.com/FineLinePrototyping/angularjs-rails-resource) - client-side models
 * [ng-rails-csrf](https://github.com/xrd/ng-rails-csrf) - Rails CSRF handling for Angular
+* [RABL](https://github.com/nesquena/rabl) - DSL for JSON (see `config/initializers/rabl_config.rb`)
 * [Coffeescript](http://coffeescript.org/) - Hipster JavaScript
 * [Slim](http://slim-lang.com/) - hipster template language (use fork in Gemfile for better Angular integration)
 
