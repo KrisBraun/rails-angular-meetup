@@ -27,3 +27,7 @@ Put these in `vendors/assets/javascripts`.
 * [AngularUI Bootstrap](http://angular-ui.github.io/bootstrap/) - Bootstrap bindings (no jQuery or Bootstrap JS required!)
 * [http-auth-interceptor](https://github.com/witoldsz/angular-http-auth) - nice pattern for client-side auth
 * [Angularitics](https://github.com/luisfarzati/angulartics) - analytics for your SPA
+
+Tools
+-----
+[Batarang](https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk?hl=en) - Chrome extension for debugging Angular
