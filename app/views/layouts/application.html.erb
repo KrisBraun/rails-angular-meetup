@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>AngularJS • TodoMVC</title>
     <style>[ng-cloak] { display: none; }</style>
+    <base href="/"/> <!-- needed for Angular 1.1.x to find relative resources -->
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tag %>
@@ -39,13 +40,13 @@
         </span>
         <ul id="filters">
           <li>
-            <a ng-class="{selected: location.path() == '/'} " href="#/">All</a>
+            <a ng-class="{selected: location.path() == '/'} " href="/">All</a>
           </li>
           <li>
-            <a ng-class="{selected: location.path() == '/active'}" href="#/active">Active</a>
+            <a ng-class="{selected: location.path() == '/active'}" href="/active">Active</a>
           </li>
           <li>
-            <a ng-class="{selected: location.path() == '/completed'}" href="#/completed">Completed</a>
+            <a ng-class="{selected: location.path() == '/completed'}" href="/completed">Completed</a>
           </li>
         </ul>
         <button id="clear-completed" ng-click="clearCompletedTodos()" ng-show="completedCount">Clear completed ({{completedCount}})</button>

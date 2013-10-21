@@ -12,6 +12,7 @@ guard 'bundler' do
 end
 
 guard 'rails' do
+  ignore(%r{config/routes.rb})
   watch('Gemfile.lock')
   watch(%r{^(config|lib)/.*})
 end
