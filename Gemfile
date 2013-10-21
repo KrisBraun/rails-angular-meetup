@@ -1,12 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.14'
+gem 'rails', '~> 3.2.14'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-gem 'sqlite3'
-
+gem 'mongoid', '~> 3.1.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -14,25 +10,34 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+  gem 'ngmin-rails'
+
+  gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+# Using a fork of Slim with a change so it doesn't interpret Angular's double
+# braces as wrapping tag attributes.
+gem 'slim', github: 'brennancheung/slim', branch: 'angularjs_support'
+gem 'slim-rails', group: [:development, :test]
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'rabl'
 
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
+gem 'momentjs-rails'
+gem 'angularjs-rails'
+gem 'angularjs-rails-resource'
+gem 'ng-rails-csrf'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+  gem 'quiet_assets'
 
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
+  gem 'guard', '~> 2.0.5'
+  gem 'guard-bundler'
+  gem 'guard-rails'
+  gem 'guard-livereload'
+  gem 'coderay', '~> 1.0.5'
+end
